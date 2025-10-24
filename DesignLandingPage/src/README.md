@@ -35,43 +35,8 @@ npm run dev
 npm run build
 ```
 
-## 🌐 Deploying to Netlify
+##Check it out here 👉🏾 ()
 
-### Option 1: Git Integration (Recommended)
-
-1. Push your code to GitHub/GitLab/Bitbucket
-2. Log in to [Netlify](https://netlify.com)
-3. Click "Add new site" → "Import an existing project"
-4. Connect your Git repository
-5. Netlify will auto-detect the build settings from `netlify.toml`
-6. Click "Deploy site"
-
-### Option 2: Netlify CLI
-
-```bash
-# Install Netlify CLI
-npm install -g netlify-cli
-
-# Login to Netlify
-netlify login
-
-# Deploy
-netlify deploy --prod
-```
-
-### Option 3: Drag & Drop
-
-1. Build your project: `npm run build`
-2. Go to [Netlify Drop](https://app.netlify.com/drop)
-3. Drag the `dist` folder to deploy instantly
-
-## 📝 Configuration
-
-The `netlify.toml` file is already configured with:
-- Build command and publish directory
-- SPA routing redirects
-- Security headers
-- Static asset caching
 
 ## 📧 Contact Information
 
