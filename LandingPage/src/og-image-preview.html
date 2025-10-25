@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Share Image Preview - 1200x630px</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            text-align: center;
+        }
+        .info {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .og-image {
+            width: 1200px;
+            height: 630px;
+            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 50%, #4338ca 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        .bg-blur-1 {
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            width: 256px;
+            height: 256px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+        .bg-blur-2 {
+            position: absolute;
+            bottom: 80px;
+            right: 80px;
+            width: 384px;
+            height: 384px;
+            background: #c4b5fd;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+        }
+        .bg-blur-3 {
+            position: absolute;
+            top: 160px;
+            right: 160px;
+            width: 192px;
+            height: 192px;
+            background: #a5b4fc;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+        }
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.1;
+        }
+        .content {
+            position: relative;
+            z-index: 10;
+            color: white;
+            text-align: center;
+            padding: 0 64px;
+            max-width: 1000px;
+        }
+        .icon-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 40px;
+        }
+        .icon-box {
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .icon {
+            width: 48px;
+            height: 48px;
+            stroke: white;
+            stroke-width: 1.5;
+            fill: none;
+        }
+        h1 {
+            font-size: 84px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+        .gradient-text {
+            display: block;
+            margin-top: 16px;
+            background: linear-gradient(to right, white, #e9d5ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .subtitle {
+            font-size: 28px;
+            color: #e9d5ff;
+            margin-bottom: 32px;
+            letter-spacing: 0.02em;
+        }
+        .contact-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 12px 24px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            stroke: white;
+            stroke-width: 2;
+            fill: none;
+        }
+        .footer {
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .footer-text {
+            font-size: 24px;
+            color: #e9d5ff;
+        }
+        .corner-tl {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 128px;
+            height: 128px;
+            border-left: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid rgba(255, 255, 255, 0.3);
+            border-top-left-radius: 24px;
+        }
+        .corner-br {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 128px;
+            height: 128px;
+            border-right: 4px solid rgba(255, 255, 255, 0.3);
+            border-bottom: 4px solid rgba(255, 255, 255, 0.3);
+            border-bottom-right-radius: 24px;
+        }
+        .instructions {
+            color: #9ca3af;
+            margin-top: 20px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .instructions strong {
+            color: #e5e7eb;
+        }
+        @media (max-width: 1280px) {
+            .og-image {
+                transform: scale(0.8);
+                transform-origin: center;
+            }
+        }
+        @media (max-width: 1024px) {
+            .og-image {
+                transform: scale(0.6);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="info">
+            <strong>Social Share Image Preview</strong> • 1200 × 630 pixels
+        </div>
+        
+        <div class="og-image" id="og-image">
+            <!-- Background blurs -->
+            <div class="bg-blur-1"></div>
+            <div class="bg-blur-2"></div>
+            <div class="bg-blur-3"></div>
+            
+            <!-- Grid overlay -->
+            <div class="grid-overlay"></div>
+            
+            <!-- Main content -->
+            <div class="content">
+                <!-- Icons -->
+                <div class="icon-row">
+                    <div class="icon-box">
+                        <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="14" height="20" x="5" y="2" rx="2" ry="2"/>
+                            <path d="M12 18h.01"/>
+                        </svg>
+                    </div>
+                    <div class="icon-box">
+                        <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                            <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                            <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                            <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                            <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/>
+                        </svg>
+                    </div>
+                    <div class="icon-box">
+                        <svg class="icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Heading -->
+                <h1>
+                    Creative Design
+                    <span class="gradient-text">That Transforms</span>
+                </h1>
+                
+                <!-- Subtitle -->
+                <p class="subtitle">
+                    App UI • Social Media • Branding • Logo Design
+                </p>
+                
+                <!-- Contact -->
+                <div class="contact-row">
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="20" height="16" x="2" y="4" rx="2"/>
+                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                        </svg>
+                        <span>danielanyahuru20</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                        </svg>
+                        <span>08071678058</span>
+                    </div>
+                </div>
+                
+                <!-- Footer -->
+                <div class="footer">
+                    <p class="footer-text">Daniel Anyahuru • Portfolio</p>
+                </div>
+            </div>
+            
+            <!-- Corner decorations -->
+            <div class="corner-tl"></div>
+            <div class="corner-br"></div>
+        </div>
+        
+        <div class="instructions">
+            <p><strong>How to save this as an image:</strong></p>
+            <p>1. Take a screenshot of just the colored area (1200×630px)<br>
+            2. Or use browser dev tools to screenshot the element<br>
+            3. Save as <code>og-image.jpg</code> or <code>og-image.png</code></p>
+        </div>
+    </div>
+</body>
+</html>
